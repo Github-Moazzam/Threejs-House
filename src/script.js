@@ -28,6 +28,9 @@ const sizes = {
 const scene = new THREE.Scene();
 
 const grassTexture = textureLoader.load('/textures/whispy-grass-meadow-bl/wispy-grass-meadow_albedo.png')
+const boxTexture = textureLoader.load('/textures/bricks-mortar-bl/bricks-mortar-albedo.png')
+const gateTexture = textureLoader.load('/textures/pngwing.com.png')
+const roofTexture = textureLoader.load('/textures/grey-asphalt-shingles-bl/grey-asphalt-shingles_albedo.png')
 
 grassTexture.repeat.set(2,2);
 grassTexture.wrapS = THREE.RepeatWrapping
@@ -51,14 +54,25 @@ grassTexture.wrapT = THREE.RepeatWrapping
 
 //geometry
 const geometry = new THREE.BoxGeometry(1,1,1);
-const torosKnotGeometry = new THREE.TorusKnotGeometry(0.5,0.15,200,200)
+// const torosKnotGeometry = new THREE.TorusKnotGeometry(0.5,0.15,200,200)
 const planeGeometry = new THREE.PlaneGeometry(1,1)
+const gateGeometry = new THREE.PlaneGeometry(1.3,2.5)
+const roofGeometry = new THREE.ConeGeometry(4,2,4,1,false)
 
 //Material
 const material = new THREE.MeshBasicMaterial();
   // material.color = new THREE.Color('green')
 
   material.map = grassTexture;
+
+  const boxMaterial = new THREE.MeshBasicMaterial();
+boxMaterial.map = boxTexture
+
+const gateMaterial = new THREE.MeshBasicMaterial()
+gateMaterial.map = gateTexture
+
+const roofMaterial = new THREE.MeshBasicMaterial()
+roofMaterial.map = roofTexture
 
 
 
@@ -71,20 +85,29 @@ const material = new THREE.MeshBasicMaterial();
 
 
 // Create Mesh
-const box1Mesh = new THREE.Mesh(geometry,material);
 
-box1Mesh.position.x = 1.5;
-const box2Mesh = new THREE.Mesh(torosKnotGeometry,material);
-
-box2Mesh.position.x = -1.5;
-const box3Mesh = new THREE.Mesh(geometry,material);
 
 const plane = new THREE.Mesh(planeGeometry,material)
 plane.rotation.x = -(Math.PI * 0.5)
 plane.scale.set(100,100)
+plane.position.set(0,0,0)
 
-// group.add(box1Mesh,box2Mesh,box3Mesh)
-group.add(plane)
+
+
+const box1 = new THREE.Mesh(geometry,boxMaterial)
+box1.scale.set(5,4.5,5 )
+
+box1.position.set(0,2.25,0)
+
+const gate = new THREE.Mesh(gateGeometry,gateMaterial)
+gate.position.set(0,1.3,2.501)
+
+
+const roof = new THREE.Mesh(roofGeometry,roofMaterial)
+roof.position.set(0,5.52,0 )
+roof.rotation.y = Math.PI *0.25
+
+group.add(box1,plane,gate,roof)
 
 
 
@@ -95,7 +118,7 @@ const light = new THREE.AmbientLight(0xffffff,0.4);
 scene.add(light);
 
 const pointLight = new THREE.PointLight(0xffffff,1.2);
-pointLight.position.set(-5,5,5);
+pointLight.position.set(0,4,0);
 scene.add(pointLight);
 
 // Camera
@@ -139,7 +162,7 @@ const tick = () => {
   const delta = currentTime - previousTime;
   previousTime = currentTime;
 
-plane.rotation.z += delta * 1
+// plane.rotation.z += delta * 1
 
  
   renderer.render(scene, camera);
