@@ -139,7 +139,7 @@ const tick = () => {
   const delta = currentTime - previousTime;
   previousTime = currentTime;
 
-// box1Mesh.rotation.y += delta * 1
+plane.rotation.z += delta * 1
 
  
   renderer.render(scene, camera);
