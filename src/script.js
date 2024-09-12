@@ -29,24 +29,24 @@ const scene = new THREE.Scene();
 
 const grassTexture = textureLoader.load('/textures/whispy-grass-meadow-bl/wispy-grass-meadow_albedo.png')
 
-// grassTexture.repeat.set(2,2);
-// grassTexture.wrapS = THREE.RepeatWrapping
-// grassTexture.wrapT = THREE.RepeatWrapping
+grassTexture.repeat.set(2,2);
+grassTexture.wrapS = THREE.RepeatWrapping
+grassTexture.wrapT = THREE.RepeatWrapping
 
-//   pane.addBinding(grassTexture, 'offset',{
-//     x:{
-//       min:-1,
-//       max:1,
-//       step:0.001
+  pane.addBinding(grassTexture, 'offset',{
+    x:{
+      min:-1,
+      max:1,
+      step:0.001
 
-//     },
-//     y:{
-//       min:-1,
-//       max:1,
-//       step:0.001
+    },
+    y:{
+      min:-1,
+      max:1,
+      step:0.001
 
-//     }
-//   })
+    }
+  })
 
 
 //geometry
